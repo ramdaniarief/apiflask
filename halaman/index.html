@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>Amazon Validator</title>
+    <style>
+        .custom-header {
+            transition: opacity 0.5s;
+            /* Tambahkan efek transisi */
+            opacity: 1;
+            /* Atur opacity secara default */
+        }
+
+        .sirah {
+            background-color: black;
+        }
+
+        body {
+            background-color: #727272;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .tit {
+            /* font-size: ; */
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .card {
+            background-color: black;
+            color: white;
+        }
+
+        footer {
+            background-color: black;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .pricingTable {
+            padding: 25px 10px 70px;
+            margin: 0 15px;
+            text-align: center;
+            z-index: 1;
+            position: relative
+        }
+
+        .pricingTable:after,
+        .pricingTable:before {
+            content: "";
+            position: absolute;
+            left: 0
+        }
+
+        .pricingTable .price-value .amount {
+            display: inline-block;
+            font-size: 50px;
+            font-weight: 700
+        }
+
+        .pricingTable .price-value .month {
+            display: block;
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 10px;
+            text-transform: uppercase
+        }
+
+        .pricingTable:before {
+            width: 100%;
+            height: 100%;
+            background: black;
+            top: 0;
+            z-index: -1;
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 74.8%, 0 74.8%);
+        }
+
+
+        .pricingTable:after {
+            width: 70px;
+            height: 30px;
+            background: #1daa72;
+            margin: 0 auto;
+            top: 70px;
+            right: 0;
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            clip-path: polygon(0 0, 0% 0, 0% 0%, 0 0%);
+        }
+
+        .pricingTable .title {
+            padding: 15px 0;
+            margin: 0 -25px 30px;
+            background: #49b0ca;
+            font-size: 25px;
+            font-weight: 600;
+            color: #fff;
+            text-transform: uppercase;
+            position: relative
+        }
+
+        .pricingTable .title:after,
+        .pricingTable .title:before {
+            border-top: 15px solid #773667;
+            border-bottom: 15px solid transparent;
+            position: absolute;
+            bottom: -30px;
+            content: ""
+        }
+
+        .pricingTable .title:before {
+            border-left: 15px solid transparent;
+            left: 0
+        }
+
+        .pricingTable .title:after {
+            border-right: 15px solid transparent;
+            right: 0
+        }
+
+        .pricingTable .price-value {
+            margin-bottom: 25px;
+            color: #49b0ca
+        }
+
+        .pricingTable .currency {
+            display: inline-block;
+            font-size: 30px;
+            vertical-align: top;
+            margin-top: 8px
+        }
+
+        .price-value .amount {
+            display: inline-block;
+            font-size: 50px;
+            font-weight: 700
+        }
+
+        .price-value .month {
+            display: block;
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 10px;
+            text-transform: uppercase
+        }
+
+        .pricingTable .pricing-content {
+            padding: 0;
+            margin: 0 0 25px;
+            list-style: none;
+            border-top: 1px solid #8f8f8f;
+            border-bottom: 1px solid #8f8f8f
+        }
+
+        .pricingTable .pricing-content li {
+            font-size: 17px;
+            color: #8f8f8f;
+            line-height: 55px
+        }
+
+        .pricingTable .pricingTable-signup {
+            display: inline-block;
+            padding: 10px 30px;
+            background: #49b0ca;
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+            overflow: hidden;
+            position: relative;
+            transition: all .7s ease 0s
+        }
+
+        .pricingTable .pricingTable-signup:before {
+            content: "";
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transform: translate(0, 100%);
+            transition: all .6s ease-in-out 0s
+        }
+
+        .pricingTable .pricingTable-signup:hover:before {
+            opacity: 1;
+            transform: translate(0, -100%)
+        }
+
+        .pricingTable.blue .pricingTable-signup,
+        .pricingTable.blue .title,
+        .pricingTable.blue:after {
+            background: #49b0ca
+        }
+
+        .pricingTable.blue .title:after,
+        .pricingTable.blue .title:before {
+            border-top: 15px solid #773667
+        }
+
+        .pricingTable.blue .price-value {
+            color: #49b0ca
+        }
+
+        .pricingTable.pink .pricingTable-signup,
+        .pricingTable.pink .title,
+        .pricingTable.pink:after {
+            background: #49b0ca
+        }
+
+        .pricingTable.pink .price-value {
+            color: #49b0ca
+        }
+
+        .pricingTable.pink .title:after,
+        .pricingTable.pink .title:before {
+            border-top: 15px solid #773667
+        }
+
+        .custom-footer {
+            background-color: black;
+            color: white;
+            padding: none;
+            /* Tambahkan padding jika diperlukan */
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            transition: opacity 0.5s;
+            /* Tambahkan efek transisi */
+            opacity: 1;
+            /* Atur opacity secara default */
+        }
+
+
+
+        @media only screen and (max-width:990px) {
+            .pricingTable {
+                margin-bottom: 30px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sirah">
+        <header class="text-white text-center m-1  custom-header">
+            <h4 class="tit">Amazon validator</h4>
+        </header>
+    </div>
+
+    <section class="container my-4">
+        <h2 class="text-center mb-4 text-white">Choose Your Subscription Plan</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="pricingTable">
+                        <h3 class="title">STANDARD</h3>
+                        <div class="price-value">
+                            <span class="currency">$</span>
+                            <span class="amount">10.00</span>
+                            <span class="month">/week</span>
+                        </div>
+                        <ul class="pricing-content">
+                            <li><b>200.000</b> Mailist Check Quota / Day</li>
+                            <li><b>Email & Phone Number</b> Support</li>
+                            <li><b>5</b> Default Worker Included</li>
+                            <li><b>Auto Recheck Error</b> Optimalized</li>
+                        </ul>
+                        <a href="https://t.me/staterfamily" class="pricingTable-signup">Order Now</a>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="pricingTable pink">
+                        <h3 class="title">BUSINESS</h3>
+                        <div class="price-value">
+                            <span class="currency">$</span>
+                            <span class="amount">25.00</span>
+                            <span class="month">/week</span>
+                        </div>
+                        <ul class="pricing-content">
+                            <li><b>500.000</b> Mailist Check Quota / Day</li>
+                            <li><b>Email & Phone Number</b> Support</li>
+                            <li><b>5</b> Default Worker Included</li>
+                            <li><b>Auto Recheck Error</b> Optimalized</li>
+                        </ul>
+                        <a href="https://t.me/staterfamily" class="pricingTable-signup">Order Now</a>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="pricingTable blue">
+                        <h3 class="title">PREMIUM</h3>
+                        <div class="price-value">
+                            <span class="currency">$</span>
+                            <span class="amount">50.00</span>
+                            <span class="month">/week</span>
+                        </div>
+                        <ul class="pricing-content">
+                            <li><b>1.000.000</b> Mailist Check Quota / Day</li>
+                            <li><b>Email & Phone Number</b> Support</li>
+                            <li><b>5</b> Default Worker Included</li>
+                            <li><b>Auto Recheck Error</b> Optimalized</li>
+                        </ul>
+                        <a href="https://t.me/staterfamily" class="pricingTable-signup">Order Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <footer class="text-white text-center custom-footer">
+        <p>&copy; 2023 Madesu anonim</p>
+    </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+        var customHeader = document.querySelector('.custom-header');
+        var lastScrollYHeader = window.scrollY;
+    
+        function handleScrollHeader() {
+            var scrollYHeader = window.scrollY;
+    
+            if (scrollYHeader > lastScrollYHeader) {
+                // Gulir ke bawah, sembunyikan header
+                customHeader.style.opacity = '0';
+            } else {
+                // Gulir ke atas, tampilkan kembali header
+                customHeader.style.opacity = '1';
+            }
+    
+            lastScrollYHeader = scrollYHeader;
+        }
+    
+        window.addEventListener("scroll", handleScrollHeader);
+    </script>
+    <script>
+        var customFooter = document.querySelector('.custom-footer');
+        var lastScrollY = window.scrollY;
+
+        function handleScroll() {
+            var scrollY = window.scrollY;
+
+            if (scrollY > lastScrollY) {
+                // Gulir ke bawah, sembunyikan footer
+                customFooter.style.opacity = '0';
+            } else {
+                // Gulir ke atas, tampilkan kembali footer
+                customFooter.style.opacity = '1';
+            }
+
+            lastScrollY = scrollY;
+        }
+
+        window.addEventListener("scroll", handleScroll);
+    </script>
+    
+
+
+
+</body>
+
+</html>

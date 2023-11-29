@@ -1,0 +1,25 @@
+{
+  "api_amz": {
+    "abcdef1234567890": {
+      "tipe": "BASIC",
+      "api_quota": 199990,
+      "reset_time": "00:00",
+      "expiration_date": "2023-12-30",
+      "remaining_days": 0
+    },
+    "ghijkl0987654321": {
+      "tipe": "ULTIMATE",
+      "api_quota": 500000,
+      "reset_time": "00:00",
+      "expiration_date": "2023-12-30",
+      "remaining_days": 0
+    },
+    "mnopqr5678901234": {
+      "tipe": "PLATINUM",
+      "api_quota": 1000000,
+      "reset_time": "00:00",
+      "expiration_date": "2023-12-30",
+      "remaining_days": 0
+    }
+  }
+}
